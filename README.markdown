@@ -10,16 +10,21 @@ COMO USAR
 
 O primeiro passo é instalar a gem.
 
+```ruby
   gem install aprova_facil
+```
 
 Depois de instalar, você precisará informar seus dados.
 
+```ruby
   AprovaFacil::Config.usuario = '<usuario>' # usuário fornecido pela Cobrebem
+```
 
 No caso de um abiente de teste ou desenvolvimento também é possível passar o parâmetro
 
+```ruby
   AprovaFacil::Config.teste = true
-
+```
 
 Efetuando uma aprovação
 -----------------------
@@ -27,6 +32,7 @@ Efetuando uma aprovação
 Para efetuar uma compra é necessário preencher uma instância da classe CartaoCredito, 
 segue abaixo os dados básicos para uma aprovação.
 
+```ruby
   cartao = AprovaFacil::CartaoCredito.new(
    :valor => 25.00,
    :numero_cartao    => '4073020000000002, 
@@ -37,9 +43,11 @@ segue abaixo os dados básicos para uma aprovação.
    :ip_comprador     => '192.168.1.1', 
    :nome_portador    => 'Ford Prefect'
   )
+```
 
 ### Outros campos disponíveis
 
+```ruby
   :documento                        # Número do documento do sistema. 
   :valor                            # Valor da transação (obrigatório)
   :numero_cartao                    # Número do cartão (obrigatório) claro! :D
@@ -54,9 +62,11 @@ segue abaixo os dados básicos para uma aprovação.
   :data_nascimento,                 # Data de nascimento do portador do cartão.
   :nome_mae                         # Nome da mão do portador do cartão.
   :parcelamento_administradora      # Informa se será parcelado pela loja ou pela adminsitrador. Padrão: true
+```
 
 ### Bandeiras
 
+```ruby
   AprovaFacil::CartaoCredito::Bandeira::VISA      
   AprovaFacil::CartaoCredito::Bandeira::MASTERCARD
   AprovaFacil::CartaoCredito::Bandeira::DINERS    
@@ -65,21 +75,25 @@ segue abaixo os dados básicos para uma aprovação.
   AprovaFacil::CartaoCredito::Bandeira::JCB       
   AprovaFacil::CartaoCredito::Bandeira::SOROCRED  
   AprovaFacil::CartaoCredito::Bandeira::AURA      
+```
 
 Após criar o cartão deve ser solicidade uma aprovação.
 
+```ruby
   aprova_facil = AprovaFacil.new
   resultado = aprova_facil.aprovar(cartao)
-
+```
 
 ### Resultados
 
+```ruby
   :aprovada           => True ou  false
   :resultado          => Descrição   da   aprovação   do resultado do pedido
   :codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
   :transacao          => ID da transação Aprova Fáci
   :cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
   :numero_documento   => ID do pedido da companhia
+```
 
 Captura
 -------
@@ -93,13 +107,17 @@ pelas Administradoras de Cartões Crédito,  a mesma será automaticame
 débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  informação  será  exibida   no  campo  
 “Data  Hora Cancelamento”do Extrato do Aprova Fácil.
 
+```ruby
   aprova_facil = AprovaFacil.new
   resultado = aprova_facil.capturar('123123123') # Código da transação
+```
 
 ### Resultados
 
+```ruby
   :capturado => True ou false
   :resultado => Descrição da captura
+```
 
 Cancelamento
 ------------
@@ -109,15 +127,18 @@ Administradora e confirmada pelo lojista. Por isso, para que o Aprova 
 cancelamento, este deve ser  solicitado no mesmo dia em que a transação foi processada, 
 ou seja, foi confirmada pela Administradora.
 
-
+```ruby
   aprova_facil = AprovaFacil.new
   resultado = aprova_facil.aprovar(cartao)
+```
 
 ### Resultados
 
+```ruby
   :cancelado        => true ou false
   :resultado        => Descrição do cancelamento
   :nsu_Cancelamento => Número de cancelamento da Administradora
+```
 
 Recorrencia
 -----------
@@ -130,22 +151,27 @@ agendamento. A re­cobrança em uma recorrência é comandada pela apli
 ser  informado apenas o número que identifica a última transação aprovada e confirmada, sendo este,
 representado pelo parâmetro "Transacao".
 
-
+```ruby
   aprova_facil = AprovaFacil.new
   resultado = aprova_facil.recobrar('123123', 25.00)
+```
 
 Assinatura do método de recobrança.
 
+```ruby
   def recobrar(transacao, valor, parcelas = '01', parcelamento_admin = true )
+```
 
 ### Resultados
 
+```ruby
   :aprovada           => True ou  false
   :resultado          => Descrição   da   aprovação   do resultado do pedido
   :codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
   :transacao          => ID da transação Aprova Fáci
   :cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
   :numero_documento   => ID do pedido da companhia
+```
 
 AUTOR:
 ------
