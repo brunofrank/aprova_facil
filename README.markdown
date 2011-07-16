@@ -88,11 +88,11 @@ Após criar o cartão deve ser solicidade uma aprovação.
 
 ```ruby
   :aprovada           => True ou  false
-  :resultado          => Descrição   da   aprovação   do resultado do pedido
-  :codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
-  :transacao          => ID da transação Aprova Fáci
-  :cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
-  :numero_documento   => ID do pedido da companhia
+  :resultado          => Descrição do resultado do pedido
+  :codigo_autorizacao => Código de autorização retornado pela administradora do cartão.
+  :transacao          => ID da transação do Aprova Fácil.
+  :cartao_mascarado   => Número do cartão de crédito mascarado. Eg. 444433******1111
+  :numero_documento   => ID do pedido.
 ```
 
 Captura
