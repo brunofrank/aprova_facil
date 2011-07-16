@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
+require 'aprova_facil/version'
 
 Gem::Specification.new do |s|
   s.name        = "aprova_facil"
