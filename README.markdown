@@ -58,25 +58,87 @@ segue abaixo os dados básicos para uma aprovação.
     <td>:documento</td>
     <td>Número do documento do sistema</td>
     <td>Não</td>
-    <td>nil</td>    
+    <td></td>    
   </tr>
+  <tr>
+    <td>:valor</td>
+    <td>Valor da transação</td>
+    <td>Sim</td>
+    <td>0.00</td>    
+  </tr>
+  <tr>
+    <td>:numero_cartao</td>
+    <td>Número do cartão</td>
+    <td>Sim</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:codigo_seguranca</td>
+    <td>Código de segurança do cartão</td>
+    <td>Sim</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:mes_validade</td>
+    <td>Mês de validade do cartão</td>
+    <td>Sim</td>
+    <td></td>    
+  </tr>        
+  <tr>
+    <td>:ano_validade</td>
+    <td>Ano de validade do cartão</td>
+    <td>Sim</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:ip_comprador</td>
+    <td>Ip do comprador</td>
+    <td>Sim</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:parcelas</td>
+    <td>Quantidade de parcelas</td>
+    <td>Não</td>
+    <td>01</td>    
+  </tr>
+  <tr>
+    <td>:bandeira</td>
+    <td>Bandeira, veja abaixo</td>
+    <td>Não</td>
+    <td>VISA</td>    
+  </tr>
+  <tr>
+    <td>:nome_portador</td>
+    <td>Nome do portador do cartão</td>
+    <td>Não</td>
+    <td></td>    
+  </tr>          
+  <tr>
+    <td>:cpf_portador</td>
+    <td>CPF do portador do cartão</td>
+    <td>Não</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:data_nascimento</td>
+    <td>Data de nascimento do portador do cartão</td>
+    <td>Não</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:nome_mae</td>
+    <td>Nome da mão do portador do cartão</td>
+    <td>Não</td>
+    <td></td>    
+  </tr>
+  <tr>
+    <td>:parcelamento_administradora</td>
+    <td>Informa se será parcelado pela loja ou pela adminsitrador</td>
+    <td>Não</td>
+    <td>True</td>    
+  </tr>        
 </table>
-
-  :documento                        # 
-  :valor                            # Valor da transação (obrigatório)
-  :numero_cartao                    # Número do cartão (obrigatório) claro! :D
-  :codigo_seguranca                 # Código de segurança do cartão. (obrigatório)
-  :mes_validade                     # Mês de validade do cartão (obrigatório)
-  :ano_validade                     # Ano de validade do cartão (obrigatório)
-  :ip_comprador                     # Ip do comprador (obrigatório)
-  :parcelas                         # Quantidade de parcelas. Padrão: 01
-  :bandeira,                        # Bandeira, veja abaixo. padrão: VISA
-  :nome_portador,                   # Nome do portador do cartão.
-  :cpf_portador,                    # CPF do portador do cartão.
-  :data_nascimento,                 # Data de nascimento do portador do cartão.
-  :nome_mae                         # Nome da mão do portador do cartão.
-  :parcelamento_administradora      # Informa se será parcelado pela loja ou pela adminsitrador. Padrão: true
-```
 
 ### Bandeiras
 
