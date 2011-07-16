@@ -45,10 +45,24 @@ segue abaixo os dados básicos para uma aprovação.
   )
 ```
 
-### Outros campos disponíveis
+### Outros atributos disponíveis
 
-```ruby
-  :documento                        # Número do documento do sistema. 
+<table>
+  <tr>
+    <th>Atributo</th>
+    <th>Descrição</th>
+    <th>Obrigatório?</th>
+    <th>Valor padrão</th>    
+  </tr>
+  <tr>
+    <td>:documento</td>
+    <td>Número do documento do sistema</td>
+    <td>Não</td>
+    <td>nil</td>    
+  </tr>
+</table>
+
+  :documento                        # 
   :valor                            # Valor da transação (obrigatório)
   :numero_cartao                    # Número do cartão (obrigatório) claro! :D
   :codigo_seguranca                 # Código de segurança do cartão. (obrigatório)
