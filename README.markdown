@@ -109,7 +109,7 @@ débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  inform
 
 ```ruby
   aprova_facil = AprovaFacil.new
-  resultado = aprova_facil.capturar('123123123') # Código da transação
+  resultado = aprova_facil.capturar('123123123') # Numero da transação
 ```
 
 ### Resultados
@@ -129,7 +129,7 @@ ou seja, foi confirmada pela Administradora.
 
 ```ruby
   aprova_facil = AprovaFacil.new
-  resultado = aprova_facil.aprovar(cartao)
+  resultado = aprova_facil.cancelar('123123') # Numero da transação
 ```
 
 ### Resultados
