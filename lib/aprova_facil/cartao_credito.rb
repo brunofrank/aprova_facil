@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 class AprovaFacil
+  
   class CartaoCredito
     
     module Bandeira
@@ -17,7 +18,7 @@ class AprovaFacil
     attr_accessor :documento, :valor, :parcelas, :numero_cartao, :codigo_seguranca,
                   :mes_validade, :ano_validade, :pre_autorizacao, :ip_comprador, 
                   :nome_portador, :bandeira, :cpf_portador, :data_nascimento, 
-                  :nome_mae, :parcelamento_administradora, :transacao_anterior, :errors
+                  :nome_mae, :parcelamento_administradora, :errors
     
     def initialize(options={})
       @documento                    = options[:documento]
@@ -65,7 +66,7 @@ class AprovaFacil
       if codigo_seguranca.nil? or codigo_seguranca.empty?        
         errors << {:codigo_seguranca => 'deve ser informado'} 
       elsif codigo_seguranca.match(/\D/)
-        errors << {:ano_validade => 'deve até 4 dígitos numéricos'} 
+        errors << {:codigo_seguranca => 'deve até apenas dígitos numéricos'} 
       end        
       
       if ip_comprador.nil? or ip_comprador.empty?
@@ -79,21 +80,21 @@ class AprovaFacil
     
     def to_params
       params = {}
-      params['NumeroDocumento']              = self.documento[0, 50] if self.documento
-      params['ValorDocumento']               = self.valor
-      params['QuantidadeParcelas']           = '%02d' % self.parcelas 
-      params['NumeroCartao']                 = self.numero_cartao
-      params['MesValidade']                  = '%02d' % self.mes_validade
-      params['AnoValidade']                  = '%02d' % self.ano_validade
-      params['CodigoSeguranc']               = self.codigo_seguranca
-      params['PreAutorizacao']               = self.pre_autorizacao ? 'S' : 'N'
-      params['EnderecoIPComprado']           = self.ip_comprador
-      params['NomePortadorCarta']            = self.nome_portador if self.nome_portador
-      params['Bandeira']                     = self.bandeira
-      params['CPFPortadorCartao']            = self.cpf_portador.gsub /\D/, '' if self.cpf_portador
-      params['DataNascimentoPortadorCartao'] = self.data_nascimento.strftime('%Y%m%d') if self.data_nascimento and self.data_nascimento.kind_of?(Date)
-      params['NomeMaePortadorCarta']         = self.nome_mae if self.nome_mae
-      params['ParcelamentoAdministrador']    = self.parcelamento_administradora ? 'S' : 'N'
+      params['NumeroDocumento']              = documento[0, 50] if self.documento
+      params['ValorDocumento']               = valor
+      params['QuantidadeParcelas']           = '%02d' % parcelas 
+      params['NumeroCartao']                 = numero_cartao
+      params['MesValidade']                  = '%02d' % mes_validade
+      params['AnoValidade']                  = '%02d' % ano_validade
+      params['CodigoSeguranc']               = codigo_seguranca
+      params['PreAutorizacao']               = pre_autorizacao ? 'S' : 'N'
+      params['EnderecoIPComprado']           = ip_comprador
+      params['NomePortadorCarta']            = nome_portador if nome_portador
+      params['Bandeira']                     = bandeira
+      params['CPFPortadorCartao']            = cpf_portador.gsub /\D/, '' if cpf_portador
+      params['DataNascimentoPortadorCartao'] = data_nascimento.strftime('%Y%m%d') if data_nascimento and data_nascimento.kind_of?(Date)
+      params['NomeMaePortadorCarta']         = nome_mae if nome_mae
+      params['ParcelamentoAdministrador']    = parcelamento_administradora ? 'S' : 'N'
 
       params    
     end    

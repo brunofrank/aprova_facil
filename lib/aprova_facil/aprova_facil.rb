@@ -11,44 +11,28 @@ class AprovaFacil
   CAPTURAR = 'CAP'
   CANCELAR = 'CAN'
   
-  def comprar(cartao_credito)    
+  # Método usado para efetuar cobraças recorrentes
+  def recobrar(transacao, valor, parcelas = '01', parcelamento_admin = true )
     request_url = url(COMPRAR)
-    request_params = cartao_credito.to_params
+    request_params = {
+      'TransacaoAnterior' => transacao,
+      'ValorDocumento' => valor,
+      'QuantidadeParcelas' => '%02d' % parcelas,
+      'ParcelamentoAdministrador' => parcelamento_admin ? 'S' : 'N'
+    }
     xml_response = commit(request_url, request_params)
-    request_result = {}
-    if xml_response
-      response = REXML::Document.new(xml_response)
-      response.elements.each 'ResultadoAPC' do |resultado|
-        resultado.elements.each 'TransacaoAprovada' do |aprovada|
-          request_result[:aprovada] = aprovada.text == 'True' ? true : false
-        end
-        
-        resultado.elements.each 'ResultadoSolicitacaoAprovacao' do |resultado|
-          request_result[:resultado] = resultado.text
-        end        
-        
-        resultado.elements.each 'CodigoAutorizacao' do |codigo_autorizacao|
-          request_result[:codigo_autorizacao] = codigo_autorizacao.text
-        end        
-        
-        resultado.elements.each 'Transacao' do |transacao|
-          request_result[:transacao] = transacao.text
-        end        
-        
-        resultado.elements.each 'CartaoMascarado' do |cartao_mascarado|
-          request_result[:cartao_mascarado] = cartao_mascarado.text
-        end        
-        
-        resultado.elements.each 'NumeroDocumento' do |numero_documento|
-          request_result[:numero_documento] = numero_documento.text
-        end                
-      end
+    treat_apc_response(xml_response)  
+  end
+  
+  def aprovar(cartao_credito)    
+    if cartao_credito.valid?
+      request_url = url(COMPRAR)
+      request_params = cartao_credito.to_params
+      xml_response = commit(request_url, request_params)
+      treat_apc_response(xml_response)
     else
-      request_result[:aprovada] = false
-      request_result[:resultado] = 'Erro ­ Erro desconhecido'
+      {:aprovada => false, :resultado => cartao_credito.errors.join('\\n')}
     end
-    
-    request_result
   end
   
   def capturar(transacao)
@@ -123,4 +107,41 @@ class AprovaFacil
     rescue Exception
       nil
     end      
+    
+    def treat_apc_response(xml_response)
+      request_result = {}
+      if xml_response
+        response = REXML::Document.new(xml_response)
+        response.elements.each 'ResultadoAPC' do |resultado|
+          resultado.elements.each 'TransacaoAprovada' do |aprovada|
+            request_result[:aprovada] = aprovada.text == 'True' ? true : false
+          end
+
+          resultado.elements.each 'ResultadoSolicitacaoAprovacao' do |resultado|
+            request_result[:resultado] = resultado.text
+          end        
+
+          resultado.elements.each 'CodigoAutorizacao' do |codigo_autorizacao|
+            request_result[:codigo_autorizacao] = codigo_autorizacao.text
+          end        
+
+          resultado.elements.each 'Transacao' do |transacao|
+            request_result[:transacao] = transacao.text
+          end        
+
+          resultado.elements.each 'CartaoMascarado' do |cartao_mascarado|
+            request_result[:cartao_mascarado] = cartao_mascarado.text
+          end        
+
+          resultado.elements.each 'NumeroDocumento' do |numero_documento|
+            request_result[:numero_documento] = numero_documento.text
+          end                
+        end
+      else
+        request_result[:aprovada] = false
+        request_result[:resultado] = 'Erro ­ Erro desconhecido'
+      end   
+      
+      request_result   
+    end
 end

@@ -19,74 +19,110 @@ class CartaoCreditoTest < TestHelper
   end
   
   def test_validations
-    # Should be valid
     assert @cartao.valid?
+  end
+  
+  def test_validation_valor
+    cartao = @cartao.clone
     
-    # Valor 0
-    @cartao.valor = 0
-    assert_equal false, @cartao.valid?
+    cartao.valor = 0
+    assert_equal false, cartao.valid?    
+
+    cartao.valor = nil
+    assert_equal false, cartao.valid?    
+
+    cartao.valor = 25.00
+    assert cartao.valid?        
+  end
+
+  def test_validation_parcelas      
+    cartao = @cartao.clone
         
-    # Valor nil
-    @cartao.valor = nil
-    assert_equal false, @cartao.valid?    
-    @cartao.valor = 25.00    
-    
-    # Parcela nil
-    @cartao.parcelas = nil
-    assert_equal false, @cartao.valid?        
+    cartao.parcelas = nil
+    assert_equal false, cartao.valid?        
         
-    # Parcela 0
-    @cartao.parcelas = 0
-    assert_equal false, @cartao.valid?    
-    @cartao.parcelas = 1
-    
-    # Numero Cartão nil
-    @cartao.numero_cartao = nil
-    assert_equal false, @cartao.valid?    
+    cartao.parcelas = 0
+    assert_equal false, cartao.valid?    
+
+    cartao.parcelas = 1
+    assert cartao.valid?        
+  end
+  
+  def test_validation_numero_cartao            
+    cartao = @cartao.clone
+        
+    cartao.numero_cartao = nil
+    assert_equal false, cartao.valid?    
         
     # Numero Cartão em branco
-    @cartao.numero_cartao = ''
-    assert_equal false, @cartao.valid?    
-    @cartao.numero_cartao = '4073020000000002'
+    cartao.numero_cartao = ''
+    assert_equal false, cartao.valid?    
     
-    @cartao.mes_validade = nil
-    assert_equal false, @cartao.valid?
+    cartao.numero_cartao = '4073020000000002'
+    assert cartao.valid?        
+  end
+  
+  def test_validation_mes_validade     
+    cartao = @cartao.clone
+           
+    cartao.mes_validade = nil
+    assert_equal false, cartao.valid?
     
-    @cartao.mes_validade = '1'
-    assert_equal false, @cartao.valid?
+    cartao.mes_validade = '1'
+    assert_equal false, cartao.valid?
     
-    @cartao.mes_validade = '123'
-    assert_equal false, @cartao.valid?    
+    cartao.mes_validade = '123'
+    assert_equal false, cartao.valid?
     
-    @cartao.mes_validade = 'aa'
-    assert_equal false, @cartao.valid?    
-    @cartao.mes_validade = '10'
+    cartao.mes_validade = 'aa'
+    assert_equal false, cartao.valid?    
+
+    cartao.mes_validade = '10'
+    assert cartao.valid?
+  end
     
-    @cartao.ano_validade = nil
-    assert_equal false, @cartao.valid?
+  def test_validation_ano_validade     
+    cartao = @cartao.clone
+             
+    cartao.ano_validade = nil
+    assert_equal false, cartao.valid?
     
-    @cartao.ano_validade = '1'
-    assert_equal false, @cartao.valid?    
+    cartao.ano_validade = '1'
+    assert_equal false, cartao.valid?    
     
-    @cartao.ano_validade = '123'
-    assert_equal false, @cartao.valid?    
+    cartao.ano_validade = '123'
+    assert_equal false, cartao.valid?    
     
-    @cartao.ano_validade = 'aa'
-    assert_equal false, @cartao.valid?    
-    @cartao.ano_validade = '14'  
+    cartao.ano_validade = 'aa'
+    assert_equal false, cartao.valid?    
+
+    cartao.ano_validade = '14'  
+    assert cartao.valid?        
+  end
+        
+  def test_validation_codigo_seguranca     
+    cartao = @cartao.clone
+                 
+    cartao.codigo_seguranca = nil
+    assert_equal false, cartao.valid?    
     
-    @cartao.codigo_seguranca = nil
-    assert_equal false, @cartao.valid?    
+    cartao.codigo_seguranca = 'aaa'
+    assert_equal false, cartao.valid?    
     
-    @cartao.codigo_seguranca = 'aaa'
-    assert_equal false, @cartao.valid?    
-    @cartao.ano_validade = '123'    
+    cartao.codigo_seguranca = '123'    
+    assert cartao.valid?            
+  end
+  
+  def test_validation_ip_comprador        
+    cartao = @cartao.clone
+        
+    cartao.ip_comprador = nil
+    assert_equal false, cartao.valid?    
     
-    @cartao.ip_comprador = nil
-    assert_equal false, @cartao.valid?    
+    cartao.ip_comprador = '123'
+    assert_equal false, cartao.valid?    
     
-    @cartao.ip_comprador = '123'
-    assert_equal false, @cartao.valid?    
-    @cartao.ip_comprador = '192.168.1.1'
+    cartao.ip_comprador = '192.168.1.1'
+    assert cartao.valid?            
   end  
 end
