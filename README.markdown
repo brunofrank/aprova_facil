@@ -135,9 +135,9 @@ ou seja, foi confirmada pela Administradora.
 ### Resultados
 
 ```ruby
-  :cancelado        => true ou false
-  :resultado        => Descrição do cancelamento
-  :nsu_Cancelamento => Número de cancelamento da Administradora
+  :cancelado        # true ou false
+  :resultado        # Descrição do cancelamento
+  :nsu_Cancelamento # Número de cancelamento da Administradora
 ```
 
 Recorrencia
