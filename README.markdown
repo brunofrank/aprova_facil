@@ -35,7 +35,7 @@ segue abaixo os dados básicos para uma aprovação.
 ```ruby
   cartao = AprovaFacil::CartaoCredito.new(
    :valor => 25.00,
-   :numero_cartao    => '4073020000000002, 
+   :numero_cartao    => '4073020000000002', 
    :codigo_seguranca => '123', 
    :mes_validade     => '10', 
    :ano_validade     => '14', 
