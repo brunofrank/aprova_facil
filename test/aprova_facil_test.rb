@@ -8,7 +8,11 @@ class AprovaFacilTest < TestHelper
   end
   
   def test_aprovar
-    resultado = @aprova_facil.aprovar cartao
+    resultado = nil
+    3.times.each do 
+      resultado = @aprova_facil.aprovar cartao      
+      break if resultado[:aprovada]       
+    end
     
     assert_equal true, resultado[:aprovada] 
     assert_not_nil resultado[:resultado]     
@@ -19,19 +23,31 @@ class AprovaFacilTest < TestHelper
   
   def test_aprovar_cartao_invalido
     cartao_invalido = cartao('502')
-    resultado = @aprova_facil.aprovar cartao_invalido
+    resultado = nil
+    3.times.each do     
+      resultado = @aprova_facil.aprovar cartao_invalido
+      break if !resultado[:aprovada]      
+    end
 
     assert_equal false, resultado[:aprovada]
   end
   
   def test_recobrar
-    resultado = @aprova_facil.aprovar cartao
+    resultado = nil
+    3.times.each do 
+      resultado = @aprova_facil.aprovar cartao      
+      break if resultado[:aprovada]
+    end
     assert_equal true, resultado[:aprovada]     
     
     resultado = @aprova_facil.capturar resultado[:transacao]
     assert_equal true, resultado[:capturado]                    
     
-    resultado = @aprova_facil.recobrar resultado[:transacao], 25.00
+    3.times.each do 
+      resultado = @aprova_facil.recobrar resultado[:transacao], 25.00
+      break if resultado[:aprovada]
+    end
+
     assert_equal true, resultado[:aprovada] 
   end
   
