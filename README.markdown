@@ -87,12 +87,12 @@ Após criar o cartão deve ser solicidade uma aprovação.
 ### Resultados
 
 ```ruby
-  :aprovada           => True ou  false
-  :resultado          => Descrição do resultado do pedido
-  :codigo_autorizacao => Código de autorização retornado pela administradora do cartão.
-  :transacao          => ID da transação do Aprova Fácil.
-  :cartao_mascarado   => Número do cartão de crédito mascarado. Eg. 444433******1111
-  :numero_documento   => ID do pedido.
+  :aprovada           # True ou  false
+  :resultado          # Descrição do resultado do pedido
+  :codigo_autorizacao # Código de autorização retornado pela administradora do cartão.
+  :transacao          # ID da transação do Aprova Fácil.
+  :cartao_mascarado   # Número do cartão de crédito mascarado. Eg. 444433******1111
+  :numero_documento   # ID do pedido.
 ```
 
 Captura
@@ -115,8 +115,8 @@ débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  inform
 ### Resultados
 
 ```ruby
-  :capturado => True ou false
-  :resultado => Descrição da captura
+  :capturado # True ou false
+  :resultado # Descrição da captura
 ```
 
 Cancelamento
@@ -165,12 +165,12 @@ Assinatura do método de recobrança.
 ### Resultados
 
 ```ruby
-  :aprovada           => True ou  false
-  :resultado          => Descrição   da   aprovação   do resultado do pedido
-  :codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
-  :transacao          => ID da transação Aprova Fáci
-  :cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
-  :numero_documento   => ID do pedido da companhia
+  :aprovada           # True ou  false
+  :resultado          # Descrição   da   aprovação   do resultado do pedido
+  :codigo_autorizacao # Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
+  :transacao          # ID da transação Aprova Fáci
+  :cartao_mascarado   # Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
+  :numero_documento   # ID do pedido da companhia
 ```
 
 AUTOR:
