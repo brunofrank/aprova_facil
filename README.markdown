@@ -10,7 +10,7 @@ COMO USAR
 
 O primeiro passo é instalar a gem.
 
-gem install aprova_facil
+  gem install aprova_facil
 
 Depois de instalar, você precisará informar seus dados.
 
@@ -27,59 +27,59 @@ Efetuando uma aprovação
 Para efetuar uma compra é necessário preencher uma instância da classe CartaoCredito, 
 segue abaixo os dados básicos para uma aprovação.
 
-cartao = AprovaFacil::CartaoCredito.new(
- :valor => 25.00,
- :numero_cartao    => '4073020000000002, 
- :codigo_seguranca => '123', 
- :mes_validade     => '10', 
- :ano_validade     => '14', 
- :bandeira         => AprovaFacil::CartaoCredito::Bandeira::VISA
- :ip_comprador     => '192.168.1.1', 
- :nome_portador    => 'Ford Prefect'
-)
+  cartao = AprovaFacil::CartaoCredito.new(
+   :valor => 25.00,
+   :numero_cartao    => '4073020000000002, 
+   :codigo_seguranca => '123', 
+   :mes_validade     => '10', 
+   :ano_validade     => '14', 
+   :bandeira         => AprovaFacil::CartaoCredito::Bandeira::VISA
+   :ip_comprador     => '192.168.1.1', 
+   :nome_portador    => 'Ford Prefect'
+  )
 
 ### Outros campos disponíveis
 
-:documento                        # Número do documento do sistema. 
-:valor                            # Valor da transação (obrigatório)
-:numero_cartao                    # Número do cartão (obrigatório) claro! :D
-:codigo_seguranca                 # Código de segurança do cartão. (obrigatório)
-:mes_validade                     # Mês de validade do cartão (obrigatório)
-:ano_validade                     # Ano de validade do cartão (obrigatório)
-:ip_comprador                     # Ip do comprador (obrigatório)
-:parcelas                         # Quantidade de parcelas. Padrão: 01
-:bandeira,                        # Bandeira, veja abaixo. padrão: VISA
-:nome_portador,                   # Nome do portador do cartão.
-:cpf_portador,                    # CPF do portador do cartão.
-:data_nascimento,                 # Data de nascimento do portador do cartão.
-:nome_mae                         # Nome da mão do portador do cartão.
-:parcelamento_administradora      # Informa se será parcelado pela loja ou pela adminsitrador. Padrão: true
+  :documento                        # Número do documento do sistema. 
+  :valor                            # Valor da transação (obrigatório)
+  :numero_cartao                    # Número do cartão (obrigatório) claro! :D
+  :codigo_seguranca                 # Código de segurança do cartão. (obrigatório)
+  :mes_validade                     # Mês de validade do cartão (obrigatório)
+  :ano_validade                     # Ano de validade do cartão (obrigatório)
+  :ip_comprador                     # Ip do comprador (obrigatório)
+  :parcelas                         # Quantidade de parcelas. Padrão: 01
+  :bandeira,                        # Bandeira, veja abaixo. padrão: VISA
+  :nome_portador,                   # Nome do portador do cartão.
+  :cpf_portador,                    # CPF do portador do cartão.
+  :data_nascimento,                 # Data de nascimento do portador do cartão.
+  :nome_mae                         # Nome da mão do portador do cartão.
+  :parcelamento_administradora      # Informa se será parcelado pela loja ou pela adminsitrador. Padrão: true
 
 ### Bandeiras
 
-AprovaFacil::CartaoCredito::Bandeira::VISA      
-AprovaFacil::CartaoCredito::Bandeira::MASTERCARD
-AprovaFacil::CartaoCredito::Bandeira::DINERS    
-AprovaFacil::CartaoCredito::Bandeira::AMEX      
-AprovaFacil::CartaoCredito::Bandeira::HIPERCARD 
-AprovaFacil::CartaoCredito::Bandeira::JCB       
-AprovaFacil::CartaoCredito::Bandeira::SOROCRED  
-AprovaFacil::CartaoCredito::Bandeira::AURA      
+  AprovaFacil::CartaoCredito::Bandeira::VISA      
+  AprovaFacil::CartaoCredito::Bandeira::MASTERCARD
+  AprovaFacil::CartaoCredito::Bandeira::DINERS    
+  AprovaFacil::CartaoCredito::Bandeira::AMEX      
+  AprovaFacil::CartaoCredito::Bandeira::HIPERCARD 
+  AprovaFacil::CartaoCredito::Bandeira::JCB       
+  AprovaFacil::CartaoCredito::Bandeira::SOROCRED  
+  AprovaFacil::CartaoCredito::Bandeira::AURA      
 
 Após criar o cartão deve ser solicidade uma aprovação.
 
-aprova_facil = AprovaFacil.new
-resultado = aprova_facil.aprovar(cartao)
+  aprova_facil = AprovaFacil.new
+  resultado = aprova_facil.aprovar(cartao)
 
 
 ### Resultados
 
-:aprovada           => True ou  false
-:resultado          => Descrição   da   aprovação   do resultado do pedido
-:codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
-:transacao          => ID da transação Aprova Fáci
-:cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
-:numero_documento   => ID do pedido da companhia
+  :aprovada           => True ou  false
+  :resultado          => Descrição   da   aprovação   do resultado do pedido
+  :codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
+  :transacao          => ID da transação Aprova Fáci
+  :cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
+  :numero_documento   => ID do pedido da companhia
 
 Captura
 -------
@@ -93,13 +93,13 @@ pelas Administradoras de Cartões Crédito,  a mesma será automaticame
 débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  informação  será  exibida   no  campo  
 “Data  Hora Cancelamento”do Extrato do Aprova Fácil.
 
-aprova_facil = AprovaFacil.new
-resultado = aprova_facil.capturar('123123123') # Código da transação
+  aprova_facil = AprovaFacil.new
+  resultado = aprova_facil.capturar('123123123') # Código da transação
 
 ### Resultados
 
-:capturado => True ou false
-:resultado => Descrição da captura
+  :capturado => True ou false
+  :resultado => Descrição da captura
 
 Cancelamento
 ------------
@@ -110,14 +110,14 @@ cancelamento, este deve ser  solicitado no mesmo dia em que a transaç
 ou seja, foi confirmada pela Administradora.
 
 
-aprova_facil = AprovaFacil.new
-resultado = aprova_facil.aprovar(cartao)
+  aprova_facil = AprovaFacil.new
+  resultado = aprova_facil.aprovar(cartao)
 
 ### Resultados
 
-:cancelado        => true ou false
-:resultado        => Descrição do cancelamento
-:nsu_Cancelamento => Número de cancelamento da Administradora
+  :cancelado        => true ou false
+  :resultado        => Descrição do cancelamento
+  :nsu_Cancelamento => Número de cancelamento da Administradora
 
 Recorrencia
 -----------
@@ -131,21 +131,21 @@ ser  informado apenas o número que identifica a última transação a
 representado pelo parâmetro "Transacao".
 
 
-aprova_facil = AprovaFacil.new
-resultado = aprova_facil.recobrar('123123', 25.00)
+  aprova_facil = AprovaFacil.new
+  resultado = aprova_facil.recobrar('123123', 25.00)
 
 Assinatura do método de recobrança.
 
-def recobrar(transacao, valor, parcelas = '01', parcelamento_admin = true )
+  def recobrar(transacao, valor, parcelas = '01', parcelamento_admin = true )
 
 ### Resultados
 
-:aprovada           => True ou  false
-:resultado          => Descrição   da   aprovação   do resultado do pedido
-:codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
-:transacao          => ID da transação Aprova Fáci
-:cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
-:numero_documento   => ID do pedido da companhia
+  :aprovada           => True ou  false
+  :resultado          => Descrição   da   aprovação   do resultado do pedido
+  :codigo_autorizacao => Código   de   autorização   retornado pela Administradora  do  cartão  de crédito
+  :transacao          => ID da transação Aprova Fáci
+  :cartao_mascarado   => Número   mascarado   do   Cartão   de Crédito Eg. 444433******1111
+  :numero_documento   => ID do pedido da companhia
 
 AUTOR:
 ------
