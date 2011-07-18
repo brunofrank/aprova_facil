@@ -25,7 +25,7 @@ class CartaoCreditoTest < TestHelper
   def test_validation_valor
     cartao = @cartao.clone
     
-    cartao.valor = 0
+    cartao.valor = '0'
     assert_equal false, cartao.valid?    
 
     cartao.valor = nil

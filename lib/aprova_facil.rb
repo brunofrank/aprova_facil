@@ -3,7 +3,6 @@ require "uri"
 require 'aprova_facil/cartao_credito'
 require 'aprova_facil/aprova_facil'
 require "rexml/document"
-$, = '-' # mudando o separador padrão
 
 class AprovaFacil
   class Config

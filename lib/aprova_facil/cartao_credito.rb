@@ -31,7 +31,7 @@ class AprovaFacil
       @pre_autorizacao              = options[:pre_autorizacao] || false
       @ip_comprador                 = options[:ip_comprador]
       @nome_portador                = options[:nome_portador]
-      @bandeira                     = options[:bandeira] || Bandeira::VISA
+      @bandeira                     = options[:bandeira]
       @cpf_portador                 = options[:cpf_portador]
       @data_nascimento              = options[:data_nascimento]
       @nome_mae                     = options[:nome_mae]
@@ -43,7 +43,7 @@ class AprovaFacil
       
     def valid?
       errors.clear
-      errors << {:valor => 'deve ser informado'} if valor.nil? or !valor.kind_of?(Float) or valor == 0
+      errors << {:valor => 'deve ser informado'} if valor.nil? or !valor.kind_of?(Float)
       
       if parcelas.nil? or (parcelas.kind_of?(Integer) and parcelas == 0)
         errors << {:parcelas => 'deve ser informado'} 
@@ -90,7 +90,7 @@ class AprovaFacil
       params['PreAutorizacao']               = pre_autorizacao ? 'S' : 'N'
       params['EnderecoIPComprado']           = ip_comprador
       params['NomePortadorCarta']            = nome_portador if nome_portador
-      params['Bandeira']                     = bandeira
+      params['Bandeira']                     = bandeira if bandeira
       params['CPFPortadorCartao']            = cpf_portador.gsub /\D/, '' if cpf_portador
       params['DataNascimentoPortadorCartao'] = data_nascimento.strftime('%Y%m%d') if data_nascimento and data_nascimento.kind_of?(Date)
       params['NomeMaePortadorCarta']         = nome_mae if nome_mae
