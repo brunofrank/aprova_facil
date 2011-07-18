@@ -80,7 +80,7 @@ class AprovaFacil
     
     def to_params
       params = {}
-      params['NumeroDocumento']              = documento[0, 50] if self.documento
+      params['NumeroDocumento']              = documento if self.documento
       params['ValorDocumento']               = valor
       params['QuantidadeParcelas']           = '%02d' % parcelas 
       params['NumeroCartao']                 = numero_cartao
