@@ -84,7 +84,7 @@ class AprovaFacil
       params['ValorDocumento']               = valor
       params['QuantidadeParcelas']           = '%02d' % parcelas 
       params['NumeroCartao']                 = numero_cartao
-      params['MesValidade']                  = '%02d' % mes_validade
+      params['MesValidade']                  = '%02d' % mes_validade.to_i
       params['AnoValidade']                  = '%02d' % ano_validade
       params['CodigoSeguranc']               = codigo_seguranca
       params['PreAutorizacao']               = pre_autorizacao ? 'S' : 'N'

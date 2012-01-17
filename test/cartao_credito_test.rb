@@ -76,8 +76,26 @@ class CartaoCreditoTest < TestHelper
     
     cartao.mes_validade = 'aa'
     assert_equal false, cartao.valid?    
-
+    
+    cartao.mes_validade = '01'
+    assert cartao.valid?
+    
+    cartao.mes_validade = '05'
+    assert cartao.valid?
+    
+    cartao.mes_validade = '07'
+    assert cartao.valid?
+    
+    cartao.mes_validade = '08'
+    assert cartao.valid?
+    
+    cartao.mes_validade = '09'
+    assert cartao.valid?
+    
     cartao.mes_validade = '10'
+    assert cartao.valid?
+    
+    cartao.mes_validade = '11'
     assert cartao.valid?
   end
     
