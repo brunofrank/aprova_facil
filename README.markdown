@@ -29,8 +29,7 @@ No caso de um abiente de teste ou desenvolvimento também é possível passar o 
 Efetuando uma aprovação
 -----------------------
 
-Para efetuar uma compra é necessário preencher uma instância da classe CartaoCredito, 
-segue abaixo os dados básicos para uma aprovação.
+Para efetuar uma compra é necessário criar uma instância da classe CartaoCredito com os dados da compra e do cartão de crédito a ser debitado.
 
 ```ruby
   cartao = AprovaFacil::CartaoCredito.new(
@@ -153,7 +152,7 @@ segue abaixo os dados básicos para uma aprovação.
   AprovaFacil::CartaoCredito::Bandeira::AURA      
 ```
 
-Após criar o cartão deve ser solicidade uma aprovação.
+Após criar o cartão, deve-se solicitar a aprovação da transação.
 
 ```ruby
   aprova_facil = AprovaFacil.new
@@ -174,14 +173,16 @@ Após criar o cartão deve ser solicidade uma aprovação.
 Captura
 -------
 
-  Entende­se  por   captura   o processo de confirmação de uma transação, o que caracteriza a venda 
-efetivada, sendo realizado assim, o débito no cartão de crédito do cliente.
-  De acordo com os padrões ISO 8583, todas as transações aprovadas pelas Administradoras de 
-Cartões de Crédito devem ser capturadas (confirmadas) pela aplicação do Lojista.
-  Caso a transação não seja capturada (confirmada) pela aplicação do Lojista, no prazo estipulado 
-pelas Administradoras de Cartões Crédito,  a mesma será automaticamente desfeita, não havendo assim o 
-débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  informação  será  exibida   no  campo  
-“Data  Hora Cancelamento”do Extrato do Aprova Fácil.
+  Entende­-se por captura o processo de confirmação de uma transação. Captura é a efetivação da venda. 
+
+  De acordo com os padrões ISO 8583, todas as transações aprovadas pelas Administradoras de Cartões de Crédito devem ser capturadas (confirmadas) pela aplicação do Lojista. 
+
+  Após essa confirmação, a reserva de crédito estabelecida na aprovação é transformada em um débito efetivo no
+cartão do Cliente.
+
+  Caso a transação não seja confirmada no prazo estipuladoa mesma será automaticamente cancelada, sem a efetivação do débito.
+
+  Tal informação será exibida no campo  “Data  Hora Cancelamento” do extrato do Aprova Fácil.
 
 ```ruby
   aprova_facil = AprovaFacil.new
@@ -198,8 +199,7 @@ débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  inform
 Cancelamento
 ------------
 
-  O cancelamento de uma transação somente poderá ser realizado quando a mesma for aprovada pela 
-Administradora e confirmada pelo lojista. Por isso, para que o Aprova Fácil possa realizar o 
+  O cancelamento de uma transação somente poderá ser realizado quando a mesma for aprovada pela Administradora e confirmada pelo Lojista. Por isso, para que o Aprova Fácil possa realizar o 
 cancelamento, este deve ser  solicitado no mesmo dia em que a transação foi processada, 
 ou seja, foi confirmada pela Administradora.
 
