@@ -86,7 +86,7 @@ class AprovaFacil
       params['NumeroCartao']                 = numero_cartao
       params['MesValidade']                  = '%02d' % mes_validade.to_i
       params['AnoValidade']                  = '%02d' % ano_validade
-      params['CodigoSeguranc']               = codigo_seguranca
+      params['CodigoSeguranca']              = codigo_seguranca
       params['PreAutorizacao']               = pre_autorizacao ? 'S' : 'N'
       params['EnderecoIPComprado']           = ip_comprador
       params['NomePortadorCarta']            = nome_portador if nome_portador
