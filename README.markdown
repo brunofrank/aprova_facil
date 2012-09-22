@@ -3,6 +3,8 @@ Aprova Fácil
 
 Gem para integração com Gateway Aprova Fácil da [Cobrebem](https://www.cobrebemx.com.br).
 
+Mais informações: http://www.cobrebem.com/imagens/ManualAPFIntegracaoWebService.pdf
+
 COMO USAR
 ---------
 
@@ -29,8 +31,7 @@ No caso de um abiente de teste ou desenvolvimento também é possível passar o 
 Efetuando uma aprovação
 -----------------------
 
-Para efetuar uma compra é necessário preencher uma instância da classe CartaoCredito, 
-segue abaixo os dados básicos para uma aprovação.
+Para efetuar uma compra é necessário criar uma instância da classe CartaoCredito com os dados da compra e do cartão de crédito a ser debitado.
 
 ```ruby
   cartao = AprovaFacil::CartaoCredito.new(
@@ -153,7 +154,7 @@ segue abaixo os dados básicos para uma aprovação.
   AprovaFacil::CartaoCredito::Bandeira::AURA      
 ```
 
-Após criar o cartão deve ser solicidade uma aprovação.
+Após criar o cartão, deve-se solicitar a aprovação da transação.
 
 ```ruby
   aprova_facil = AprovaFacil.new
@@ -174,14 +175,16 @@ Após criar o cartão deve ser solicidade uma aprovação.
 Captura
 -------
 
-  Entende­se  por   captura   o processo de confirmação de uma transação, o que caracteriza a venda 
-efetivada, sendo realizado assim, o débito no cartão de crédito do cliente.
-  De acordo com os padrões ISO 8583, todas as transações aprovadas pelas Administradoras de 
-Cartões de Crédito devem ser capturadas (confirmadas) pela aplicação do Lojista.
-  Caso a transação não seja capturada (confirmada) pela aplicação do Lojista, no prazo estipulado 
-pelas Administradoras de Cartões Crédito,  a mesma será automaticamente desfeita, não havendo assim o 
-débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  informação  será  exibida   no  campo  
-“Data  Hora Cancelamento”do Extrato do Aprova Fácil.
+  Entende­-se por captura o processo de confirmação de uma transação. Em outras palavras, captura é a efetivação da venda. 
+
+  De acordo com os padrões ISO 8583, todas as transações aprovadas pelas Administradoras de Cartões de Crédito devem ser capturadas (confirmadas) pela aplicação do Lojista. 
+
+  Após essa confirmação, a reserva de crédito estabelecida na aprovação é transformada em um débito efetivo no
+cartão do Cliente.
+
+  Caso a transação não seja confirmada no prazo estipulado, a mesma será automaticamente desfeita, sem a efetivação do débito.
+
+  Tal informação será exibida no campo  “Data  Hora Cancelamento” do extrato do Aprova Fácil.
 
 ```ruby
   aprova_facil = AprovaFacil.new
@@ -198,10 +201,10 @@ débito  efetivo  no  cartão  de  crédito  do  cliente,  essa  inform
 Cancelamento
 ------------
 
-  O cancelamento de uma transação somente poderá ser realizado quando a mesma for aprovada pela 
-Administradora e confirmada pelo lojista. Por isso, para que o Aprova Fácil possa realizar o 
-cancelamento, este deve ser  solicitado no mesmo dia em que a transação foi processada, 
-ou seja, foi confirmada pela Administradora.
+  Como todas as transações precisam ser confirmadas pelo Lojista, um cancelamento de transação só faz sentido após a sua confirmação.
+
+  Após a confirmação do Lojista (captura), a transação ainda pode ser cancelada antes que o sistema de cobrança das administradoras debitem o valor do cliente (após esse prazo o valor será debitado e a reversão da venda deverá ser feita via Estorno). 
+
 
 ```ruby
   aprova_facil = AprovaFacil.new
@@ -216,16 +219,12 @@ ou seja, foi confirmada pela Administradora.
   :nsu_Cancelamento # Número de cancelamento da Administradora
 ```
 
-Recorrencia
+Recorrência
 -----------
 
-  A recorrência de transações é utilizada, quando se deseja efetuar novos débitos em um cartão de
-crédito, seja esta de qualquer  periodicidade; é possível alterar  o valor  do débito a cada cobrança, se
-necessário.
-  O processo de "re­cobrança" em uma recorrência, se difere do processo de "re­cobrança" em um
-agendamento. A re­cobrança em uma recorrência é comandada pela aplicação do lojista, nesse caso, deve
-ser  informado apenas o número que identifica a última transação aprovada e confirmada, sendo este,
-representado pelo parâmetro "Transacao".
+A recorrência de transações é utilizada quando se deseja efetuar novos débitos em um cartão de crédito, em qualquer periodicidade, podendo ainda alterar o valor do débito a cada cobrança.
+
+O processo de "re­cobrança" em uma recorrência, se difere do processo de "re­cobrança" em um agendamento A re­cobrança em uma recorrência é comandada pela aplicação do lojista. Nesse caso, a última transação aprovada e confirmada previsa ser passada como parâmetro.
 
 ```ruby
   aprova_facil = AprovaFacil.new
