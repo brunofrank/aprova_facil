@@ -40,7 +40,7 @@ Para efetuar uma compra é necessário criar uma instância da classe CartaoCred
    :codigo_seguranca => '123', 
    :mes_validade     => '10', 
    :ano_validade     => '14', 
-   :bandeira         => AprovaFacil::CartaoCredito::Bandeira::VISA
+   :bandeira         => AprovaFacil::CartaoCredito::Bandeira::VISA,
    :ip_comprador     => '192.168.1.1', 
    :nome_portador    => 'Ford Prefect'
   )
