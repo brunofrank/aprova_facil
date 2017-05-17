@@ -12,13 +12,14 @@ class AprovaFacil
   CANCELAR = 'CAN'
   
   # Método usado para efetuar cobraças recorrentes
-  def recobrar(transacao, valor, parcelas = '01', parcelamento_admin = true )
+  def recobrar(transacao, valor, parcelas = '01', parcelamento_admin = true, documento)
     request_url = url(COMPRAR)
     request_params = {
       'TransacaoAnterior' => transacao,
       'ValorDocumento' => valor,
       'QuantidadeParcelas' => '%02d' % parcelas,
-      'ParcelamentoAdministrador' => parcelamento_admin ? 'S' : 'N'
+      'ParcelamentoAdministrador' => parcelamento_admin ? 'S' : 'N',
+      'NumeroDocumento' => documento
     }
     xml_response = commit(request_url, request_params)
     treat_apc_response(xml_response)  
